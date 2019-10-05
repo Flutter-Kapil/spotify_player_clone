@@ -9,8 +9,11 @@ void main() {
       title: Text(
         'Best of Hindi',
       ),
+      centerTitle: true,
+      backgroundColor: Colors.black,
     ),
     body: SpotifyPlayer(),
+    backgroundColor: Colors.black,
   )));
 }
 
@@ -35,49 +38,89 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Image(
-          image: NetworkImage(dummySong.imageUrl),
+        Expanded(
+          flex: 8,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Image(
+              image: NetworkImage(dummySong.imageUrl),
+            ),
+          ),
         ),
-        Text(dummySong.name),
-        Text(dummySong.artistName),
-        Row(
-          children: <Widget>[
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.thumb_up),
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 5.0),
+          child: Container(
+            child: Text(
+              dummySong.name,
+              style: TextStyle(fontSize: 25, color: Colors.white),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.queue_play_next),
+            alignment: Alignment.bottomLeft,
+          ),
+        )),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15.0, 2.0, 15.0, 5.0),
+            child: Container(
+              child: Text(dummySong.artistName,
+                  style: TextStyle(
+                      fontSize: 18, color: Colors.white.withOpacity(0.6))),
+              alignment: Alignment.topLeft,
             ),
-            IconButton(
-              onPressed: () {
-                if (playpause == Icons.play_circle_filled) {
-                  playpause = Icons.pause;
-                  audioPlayer.play(dummySong.playUrl);
-                } else {
-                  playpause = Icons.play_circle_filled;
-                  audioPlayer.pause();
-                }
-                setState(() {});
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.thumb_up,
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.skip_previous,
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                color: Colors.white,
+                iconSize: 70,
+                onPressed: () {
+                  if (playpause == Icons.play_circle_filled) {
+                    playpause = Icons.pause;
+                    audioPlayer.play(dummySong.playUrl);
+                  } else {
+                    playpause = Icons.play_circle_filled;
+                    audioPlayer.pause();
+                  }
+                  setState(() {});
 //                setState(() {
 //                  audioPlayer.play(dummySong.playUrl);
 //                });
 //                audioPlayer.play(dummySong.playUrl);
-              },
-              icon: Icon(playpause),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.queue_play_next),
-            ),
-            IconButton(
-              onPressed: () {
-                audioPlayer.pause();
-              },
-              icon: Icon(Icons.thumb_down),
-            ),
-          ],
+                },
+                icon: Icon(playpause),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.skip_next),
+                color: Colors.white,
+              ),
+              IconButton(
+                color: Colors.white,
+                onPressed: () {
+                  audioPlayer.pause();
+                },
+                icon: Icon(Icons.thumb_down),
+              ),
+            ],
+          ),
         )
       ],
     );
