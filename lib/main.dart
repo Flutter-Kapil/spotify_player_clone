@@ -4,17 +4,18 @@ import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(MaterialApp(
-      home: Scaffold(
-    appBar: AppBar(
-      title: Text(
-        'Best of Hindi',
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Best of Hindi',
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black,
       ),
-      centerTitle: true,
+      body: SpotifyPlayer(),
       backgroundColor: Colors.black,
     ),
-    body: SpotifyPlayer(),
-    backgroundColor: Colors.black,
-  )));
+  ));
 }
 
 class SpotifyPlayer extends StatefulWidget {
@@ -33,6 +34,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
       SongData().songs; // You are given a list of songs here for Stretch
 
   IconData playpause = Icons.play_circle_filled;
+  int i = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Image(
-              image: NetworkImage(dummySong.imageUrl),
+              image: NetworkImage(allSongs[i].imageUrl),
             ),
           ),
         ),
@@ -52,7 +54,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
           padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 5.0),
           child: Container(
             child: Text(
-              dummySong.name,
+              allSongs[i].name,
               style: TextStyle(fontSize: 25, color: Colors.white),
             ),
             alignment: Alignment.bottomLeft,
@@ -62,7 +64,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(15.0, 2.0, 15.0, 5.0),
             child: Container(
-              child: Text(dummySong.artistName,
+              child: Text(allSongs[i].artistName,
                   style: TextStyle(
                       fontSize: 18, color: Colors.white.withOpacity(0.6))),
               alignment: Alignment.topLeft,
@@ -82,7 +84,16 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (i > 0) {
+                    i--;
+                    audioPlayer.play(allSongs[i].playUrl);
+                  } else if (i == 0) {
+                    i = allSongs.length - 1;
+                    audioPlayer.play(allSongs[i].playUrl);
+                  }
+                  setState(() {});
+                },
                 icon: Icon(
                   Icons.skip_previous,
                   color: Colors.white,
@@ -94,7 +105,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                 onPressed: () {
                   if (playpause == Icons.play_circle_filled) {
                     playpause = Icons.pause;
-                    audioPlayer.play(dummySong.playUrl);
+                    audioPlayer.play(allSongs[i].playUrl);
                   } else {
                     playpause = Icons.play_circle_filled;
                     audioPlayer.pause();
@@ -108,7 +119,16 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                 icon: Icon(playpause),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (i < allSongs.length) {
+                    i++;
+                    audioPlayer.play(allSongs[i].playUrl);
+                  } else {
+                    i = 0;
+                    audioPlayer.play(allSongs[i].playUrl);
+                  }
+                  setState(() {});
+                },
                 icon: Icon(Icons.skip_next),
                 color: Colors.white,
               ),
