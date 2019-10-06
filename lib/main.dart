@@ -88,8 +88,10 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                   if (i > 0) {
                     i--;
                     audioPlayer.play(allSongs[i].playUrl);
+                    playpause = Icons.pause;
                   } else if (i == 0) {
                     i = allSongs.length - 1;
+                    playpause = Icons.pause;
                     audioPlayer.play(allSongs[i].playUrl);
                   }
                   setState(() {});
@@ -123,9 +125,11 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                   if (i < allSongs.length) {
                     i++;
                     audioPlayer.play(allSongs[i].playUrl);
+                    playpause = Icons.pause;
                   } else {
                     i = 0;
                     audioPlayer.play(allSongs[i].playUrl);
+                    playpause = Icons.pause;
                   }
                   setState(() {});
                 },
