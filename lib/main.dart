@@ -126,7 +126,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                     i++;
                     audioPlayer.play(allSongs[i].playUrl);
                     playpause = Icons.pause;
-                  } else {
+                  } else if (i == allSongs.length){
                     i = 0;
                     audioPlayer.play(allSongs[i].playUrl);
                     playpause = Icons.pause;
