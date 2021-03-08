@@ -1,6 +1,6 @@
-# spotify_player_clone
+# spotiyf_player_ui_clone
 
-Spotify player clone assignment
+A new Flutter project.
 
 ## Getting Started
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_player_clone/song.dart';
 import 'package:audioplayers/audioplayers.dart';
+
+import 'song.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -126,7 +127,7 @@ class _SpotifyPlayerState extends State<SpotifyPlayer> {
                     i++;
                     audioPlayer.play(allSongs[i].playUrl);
                     playpause = Icons.pause;
-                  } else if (i == allSongs.length){
+                  } else if (i == allSongs.length) {
                     i = 0;
                     audioPlayer.play(allSongs[i].playUrl);
                     playpause = Icons.pause;
